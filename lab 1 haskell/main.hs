@@ -1,6 +1,6 @@
 module Main where
 
---outputs a list--
+--returns list--
 getList:: (Int, Int, [Int]) -> [Int] 
 getList (sum, i, list) = list
 
@@ -33,7 +33,7 @@ sortSub (x:xs) =    let small = sortSub[i | i <- xs, getListSum i <= getListSum 
                         big = sortSub [i | i <- xs, getListSum i > getListSum x]
                     in  small ++ [x] ++ big
 
--- takes a list and returns the k smallest sublists--
+-- takes a list and returns the k first sublists, since they are ordered from smallest to biggest sumwise, the smallest will be selected before the bigger ones--
 smallestKsets :: [Int] -> Int -> [(Int, Int, [Int])]
 smallestKsets xs k =    let sublist = subLists xs 1
                             sortedSubs = sortSub sublist
@@ -54,7 +54,7 @@ stringFormat (x:xs) = show (getListSum x) ++ " " ++ show(startIndex x) ++ " " ++
 stringHeader :: String
 stringHeader = "size i j sublist \n"
 
--- uses the tests provided in the lab--
+-- uses the tests provided in the lab instructions--
 test1 :: [Int]
 test1 = [x * (-1) ^x | x <- [1..100]]
 
