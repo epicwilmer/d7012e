@@ -26,7 +26,7 @@ subLists :: [Int] -> Int -> [(Int, Int, [Int])]
 subLists [] _ = []
 subLists subL i = subSum subL i ++ subLists (tail subL) (i+1)
 
---Returns sublists sorted by smallest to biggest. list from header i, where list is read from header to tail xs, where getListSum i is either <= sum of argument list or > sum of argument list--
+--Returns lists sorted by smallest to biggest sum of all elements inside each list.--
 sortSub :: [(Int, Int, [Int])] -> [(Int, Int, [Int])]
 sortSub [] = []
 sortSub (x:xs) =    let small = sortSub[i | i <- xs, getListSum i <= getListSum x]
