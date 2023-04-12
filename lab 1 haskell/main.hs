@@ -8,23 +8,23 @@ getList (sum, i, list) = list
 getListSum :: (Int, Int, [Int]) -> Int 
 getListSum (sum, i, list) = sum
 
---i value--
+--first index of list--
 startIndex :: (Int, Int, [Int]) -> Int
 startIndex (sum, i, list) = i
 
---j value--
+--last index of list--
 endIndex :: (Int, Int, [Int]) -> Int
 endIndex (sum, i, list) = i + length list -1
 
---Start point for each sublist when creating sublists for the sorting--
-subPrefix :: [Int] -> Int -> [(Int, Int, [Int])]
-subPrefix [] _ = []
-subPrefix xs i = (sum xs, i, xs) : subPrefix (init xs) i
+--creates sublists of [i,...j], sums all elements in the lists. and repeates this process for [i,...j-1] and so forth until j=i--
+subSum :: [Int] -> Int -> [(Int, Int, [Int])]
+subSum [] _ = []
+subSum subL i = (sum subL, i, subL) : subSum (init subL) i
 
---Creates a series of sublists, where header is the input Int--
+--used to create all sublists of [i,...j], and then [i+1,...j] until i=j, where j is the last element of the list--
 subLists :: [Int] -> Int -> [(Int, Int, [Int])]
 subLists [] _ = []
-subLists xs i = subPrefix xs i ++ subLists (tail xs) (i+1)
+subLists subL i = subSum subL i ++ subLists (tail subL) (i+1)
 
 --Returns sublists sorted by smallest to biggest. list from header i, where list is read from header to tail xs, where getListSum i is either <= sum of argument list or > sum of argument list--
 sortSub :: [(Int, Int, [Int])] -> [(Int, Int, [Int])]
@@ -72,3 +72,5 @@ main = do
     putStr(stringHeader ++ stringFormat (smallestKsets test2 6))
     putStr "\n \n"
     putStr(stringHeader ++ stringFormat (smallestKsets test3 8))
+    putStr "\n \n"
+    putStr(stringHeader ++ stringFormat (subLists test2 1))
