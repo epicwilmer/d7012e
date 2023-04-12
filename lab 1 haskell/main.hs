@@ -16,7 +16,7 @@ startIndex (sum, i, list) = i
 endIndex :: (Int, Int, [Int]) -> Int
 endIndex (sum, i, list) = i + length list -1
 
---creates sublists of [i,...j], sums all elements in the lists. and repeates this process for [i,...j-1] and so forth until j=i--
+--Sums all elements from [i,...j], sums and repeates this process for [i,...j-1] and so forth until j=i--
 subSum :: [Int] -> Int -> [(Int, Int, [Int])]
 subSum [] _ = []
 subSum subL i = (sum subL, i, subL) : subSum (init subL) i
